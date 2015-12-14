@@ -25,7 +25,10 @@ public class Yose {
                 response.contentType("text/html");
                 response.body(
                         "<html><body>Hello Yose <a id=\"contact-me-link\" href=\"/aboutme\">Contact Me</a>" +
-                                "<a id=\"ping-challenge-link\" href=\"/ping\">Ping</a></body></html>");
+                                "<a id=\"ping-challenge-link\" href=\"/ping\">Ping</a>" +
+                                "<a id=\"repository-link\" href=\"#readme\">Link</a>"+
+                                "<div id=\"readme\">YoseTheGame</div>"+
+                                "</body></html>");
             });
             get("/ping").to(new Ping(gson)::pong);
             get("/astroport").to((request, response) -> {
@@ -38,7 +41,7 @@ public class Yose {
                                 "<div id=\"ship-2\">ship 2</div></div>"+
                                 "<div id=\"gate-3\">gate 3"+
                                 "<div id=\"ship-3\">ship 3</div></div>"+
-                                "Ship <input type=\"text\" id=\"ship\"/> <button type=\"button\" id=\"dock\">Dock</button>"+
+                                "Ship <form action=\"/astroport\"><input type=\"text\" id=\"ship\" name=\"ship\"/> <button type=\"submit\" id=\"dock\">Dock</button></form>"+
                                 "</body></html>"
                 );
             });
