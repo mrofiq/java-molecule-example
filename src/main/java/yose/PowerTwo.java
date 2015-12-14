@@ -39,13 +39,13 @@ public class PowerTwo {
             }
 
             result = new Result1();
-            result.number = number;
-            result.decomposition = dec;
+            ((Result1)result).number = number;
+            ((Result1)result).decomposition = dec;
         }
         catch (Exception ex){
             result = new Result2();
-            result.number = num;
-            result.error = "not a number";
+            ((Result2)result).number = num;
+            ((Result2)result).error = "not a number";
         }
 
 
@@ -53,7 +53,7 @@ public class PowerTwo {
         response.contentType(JSON).body(gson.toJson(result));
     }
 
-    public static abstract class Result{
+    public static  abstract class Result{
     }
 
     public  static class Result1 extends Result{
