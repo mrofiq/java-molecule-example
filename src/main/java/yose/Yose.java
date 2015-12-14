@@ -19,7 +19,7 @@ public class Yose {
         final Gson gson = new Gson();
 
         server.start(new DynamicRoutes() {{
-            get("/").to((request, response) -> response.body("Hello Yose"));
+            get("/").to((request, response) -> response.body("<html><body>Hello Yose <a id=\"contact-me-link\">Contact Me</a></body></html>"));
             get("/ping").to(new Ping(gson)::pong);
         }});
     }
