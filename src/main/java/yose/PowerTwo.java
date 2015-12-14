@@ -33,7 +33,7 @@ public class PowerTwo {
             result.number = number;
             result.decomposition = dec;
         }
-        catch (NumberFormatException ex){
+        catch (Exception ex){
             result = new Result2();
             result.number = num;
             result.error = "not a number";
