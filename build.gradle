@@ -8,6 +8,7 @@ repositories {
 }
 
 def libs = [
+        mustache          : 'com.samskivert:jmustache:1.9',
         gson              : 'com.google.code.gson:gson:2.2.4',
         molecule          : 'com.vtence.molecule:molecule:0.7',
         simple            : 'org.simpleframework:simple:5.1.6',
@@ -20,6 +21,7 @@ def libs = [
 ]
 
 dependencies {
+    compile libs.mustache
     compile libs.gson
     compile libs.molecule
     compile libs.simple

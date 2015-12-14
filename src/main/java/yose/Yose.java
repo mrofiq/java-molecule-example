@@ -7,7 +7,11 @@ import com.vtence.molecule.templating.Template;
 import com.vtence.molecule.templating.Templates;
 
 import java.io.IOException;
+import java.io.File;
 import java.net.URI;
+import com.vtence.molecule.templating.JMustacheRenderer;
+import com.vtence.molecule.templating.Template;
+import com.vtence.molecule.templating.Templates;
 
 public class Yose {
 
@@ -18,6 +22,8 @@ public class Yose {
     }
 
     public void start() throws IOException {
+        final Templates templates = new Templates(
+                new JMustacheRenderer().fromDir(new File("templates")).extension("html"));
         final Gson gson = new Gson();
 
         server.start(new DynamicRoutes() {{
@@ -29,6 +35,10 @@ public class Yose {
                                 "<a id=\"repository-link\" href=\"https://github.com/mrofiq/java-molecule-example\">Link</a>"+
                                 "<div id=\"readme\">YoseTheGame</div>"+
                                 "</body></html>");
+            });
+            get("/test").to((request, response) -> {
+                response.contentType("text/html");
+                response.body(templates.named("test").render(null));
             });
             get("/readme").to((request, response) -> {
                 response.contentType("text/html");
