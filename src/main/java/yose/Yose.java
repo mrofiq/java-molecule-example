@@ -19,7 +19,9 @@ public class Yose {
         final Gson gson = new Gson();
 
         server.start(new DynamicRoutes() {{
-            get("/").to((request, response) -> response.body("<html><body>Hello Yose <a id=\"contact-me-link\" href=\"/aboutme\">Contact Me</a></body></html>"));
+            get("/").to((request, response) -> response.body(
+                    "<html><body>Hello Yose <a id=\"contact-me-link\" href=\"/aboutme\">Contact Me</a>" +
+                            "<a id=\"ping-challenge-link\" href=\"/ping\">Ping</a></body></html>"));
             get("/ping").to(new Ping(gson)::pong);
             get("/astroport").to((request, response) -> {
                 response.contentType("text/html");
