@@ -21,7 +21,7 @@ public class PowerTwo {
         Result result;
 
         try{
-            int number = Integer.valueOf(num);
+            int number = Integer.parseInt(num);
             int power2 = power2(number);
 
             ArrayList dec = new ArrayList();
