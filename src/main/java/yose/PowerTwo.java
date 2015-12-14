@@ -15,7 +15,7 @@ public class PowerTwo {
         this.gson = gson;
     }
 
-    public void primeFactors(Request request, Response response) throws Exception {
+    public void primeFactors(Request request, Response response){
         String num = request.parameter("number");
 
         Result result;
