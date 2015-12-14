@@ -17,50 +17,51 @@ public class PowerTwo {
 
     public void primeFactors(Request request, Response response) throws Exception {
         String num = request.parameter("number");
-        int number = -1;
 
-        try {
-            number = Integer.parseInt(num);
-        }
-        catch (Exception e){
+        Result result;
 
-        }
+        try{
+            int number = Integer.parseInt(num);
 
-        if (number != -1){
-            number = Integer.parseInt(num);
+
+
             int power2 = power2(number);
+
 
             ArrayList dec = new ArrayList();
             for(int i=0;i<power2;i++){
                 dec.add(2);
             }
 
-            Result1 result = new Result1();
+            ArrayList<Integer> dec2 = primeFactors((long)number);
+            if(dec2.size()< dec.size()){
+                dec = dec2;
+            }
+
+            result = new Result1();
             result.number = number;
             result.decomposition = dec;
-            response.contentType(JSON).body(gson.toJson(result));
         }
-        else {
-            Result2 result2 = new Result2();
-            result2.number = num;
-            result2.error = "not a number";
-            response.contentType(JSON).body(gson.toJson(result2));
+        catch (Exception ex){
+            result = new Result2();
+            result.number = num;
+            result.error = "not a number";
         }
 
 
 
-
+        response.contentType(JSON).body(gson.toJson(result));
     }
 
     public static abstract class Result{
     }
 
-    public  static class Result1{
+    public  static class Result1 extends Result{
         public int number;
         public ArrayList<Integer> decomposition;
     }
 
-    public static class Result2{
+    public static class Result2 extends Result{
         public String number = "";
         public String error = "";
     }
@@ -73,5 +74,19 @@ public class PowerTwo {
             counter=counter+1;
         }
         return counter;
+    }
+
+
+    public static ArrayList<Integer> primeFactors(long number) {
+        ArrayList<Integer> pF = new ArrayList<Integer>();
+        long copyOfInput = number;
+        for (int i = 2; i &lt;= copyOfInput; i++) {
+            if (copyOfInput % i == 0) {
+                pF.add(i); // prime factor
+                copyOfInput /= i;
+                i--;
+            }
+        }
+        return pF;
     }
 }
