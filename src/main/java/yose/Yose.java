@@ -21,6 +21,7 @@ public class Yose {
         server.start(new DynamicRoutes() {{
             get("/").to((request, response) -> response.body("<html><body>Hello Yose <a id=\"contact-me-link\" href=\"/aboutme\">Contact Me</a></body></html>"));
             get("/ping").to(new Ping(gson)::pong);
+            get("/astroport").to((request, response) -> response.body("<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div></body></html>"))
         }});
     }
 
