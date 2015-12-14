@@ -3,6 +3,8 @@ package yose;
 import com.google.gson.Gson;
 import com.vtence.molecule.WebServer;
 import com.vtence.molecule.routing.DynamicRoutes;
+import com.vtence.molecule.templating.Template;
+import com.vtence.molecule.templating.Templates;
 
 import java.io.IOException;
 import java.net.URI;
@@ -23,13 +25,31 @@ public class Yose {
                 response.contentType("text/html");
                 response.body(
                         "<html><body>Hello Yose <a id=\"contact-me-link\" href=\"/aboutme\">Contact Me</a>" +
-                                "<a id=\"ping-challenge-link\" href=\"/ping\">Ping</a></body></html>");
+                                "<a id=\"ping-challenge-link\" href=\"/ping\">Ping</a>" +
+                                "<a id=\"repository-link\" href=\"https://github.com/mrofiq/java-molecule-example\">Link</a>"+
+                                "<div id=\"readme\">YoseTheGame</div>"+
+                                "</body></html>");
+            });
+            get("/readme").to((request, response) -> {
+                response.contentType("text/html");
+                response.body(
+                        "<html><body>"+
+                                "<div id=\"readme\">YoseTheGame</div>"+
+                                "</body></html>");
             });
             get("/ping").to(new Ping(gson)::pong);
             get("/astroport").to((request, response) -> {
                 response.contentType("text/html");
                 response.body(
-                        "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div></body></html>"
+                        "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div>" +
+                                "<div id=\"gate-1\">gate 1"+
+                                "<div id=\"ship-1\">ship 1</div></div>"+
+                                "<div id=\"gate-2\">gate 2"+
+                                "<div id=\"ship-2\">ship 2</div></div>"+
+                                "<div id=\"gate-3\">gate 3"+
+                                "<div id=\"ship-3\">ship 3</div></div>"+
+                                "Ship <form action=\"/astroport\"><input type=\"text\" id=\"ship\" name=\"ship\"/> <button type=\"submit\" id=\"dock\">Dock</button></form>"+
+                                "</body></html>"
                 );
             });
             get("/primeFactors").to(new PowerTwo(gson)::primeFactors);
