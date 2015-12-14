@@ -27,6 +27,7 @@ public class Yose {
                         "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div></body></html>"
                 );
             });
+            get("/primeFactors").to(new PowerTwo(gson)::primeFactors);
         }});
     }
 
