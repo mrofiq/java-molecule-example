@@ -80,7 +80,7 @@ public class PowerTwo {
     public static ArrayList<Integer> primeFactors(long number) {
         ArrayList<Integer> pF = new ArrayList<Integer>();
         long copyOfInput = number;
-        for (int i = 2; i &lt;= copyOfInput; i++) {
+        for (int i = 2; i <= copyOfInput; i++) {
             if (copyOfInput % i == 0) {
                 pF.add(i); // prime factor
                 copyOfInput /= i;
