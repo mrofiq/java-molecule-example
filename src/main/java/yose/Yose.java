@@ -26,7 +26,14 @@ public class Yose {
                 response.body(
                         "<html><body>Hello Yose <a id=\"contact-me-link\" href=\"/aboutme\">Contact Me</a>" +
                                 "<a id=\"ping-challenge-link\" href=\"/ping\">Ping</a>" +
-                                "<a id=\"repository-link\" href=\"#readme\">Link</a>"+
+                                "<a id=\"repository-link\" href=\"/readme\">Link</a>"+
+                                "<div id=\"readme\">YoseTheGame</div>"+
+                                "</body></html>");
+            });
+            get("/readme").to((request, response) -> {
+                response.contentType("text/html");
+                response.body(
+                        "<html><body>"+
                                 "<div id=\"readme\">YoseTheGame</div>"+
                                 "</body></html>");
             });
