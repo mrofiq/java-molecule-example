@@ -38,6 +38,7 @@ public class Yose {
                                 "<div id=\"ship-2\">ship 2</div></div>"+
                                 "<div id=\"gate-3\">gate 3"+
                                 "<div id=\"ship-3\">ship 3</div></div>"+
+                                "Ship <input type=\"text\" id=\"ship\"/> <button type=\"button\" id=\"dock\">Dock</button>"+
                                 "</body></html>"
                 );
             });
