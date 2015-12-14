@@ -3,6 +3,8 @@ package yose;
 import com.google.gson.Gson;
 import com.vtence.molecule.WebServer;
 import com.vtence.molecule.routing.DynamicRoutes;
+import com.vtence.molecule.templating.Template;
+import com.vtence.molecule.templating.Templates;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,7 +31,14 @@ public class Yose {
             get("/astroport").to((request, response) -> {
                 response.contentType("text/html");
                 response.body(
-                        "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div></body></html>"
+                        "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div>" +
+                                "<div id=\"gate-1\">gate 1</div>"+
+                                "<div id=\"gate-2\">gate 2</div>"+
+                                "<div id=\"gate-3\">gate 3</div>"+
+                                "<div id=\"ship-1\">ship 1</div>"+
+                                "<div id=\"ship-2\">ship 2</div>"+
+                                "<div id=\"ship-3\">ship 3</div>"+
+                                "</body></html>"
                 );
             });
             get("/primeFactors").to(new PowerTwo(gson)::primeFactors);
