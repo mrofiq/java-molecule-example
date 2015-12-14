@@ -15,13 +15,21 @@ public class PowerTwo {
         this.gson = gson;
     }
 
-    public void primeFactors(Request request, Response response){
+    public void primeFactors(Request request, Response response) throws Exception {
         String num = request.parameter("number");
 
         Result result;
+        int number = -1;
 
-        try{
-            int number = Integer.parseInt(num);
+        try {
+            number = Integer.parseInt(num);
+        }
+        catch (Exception e){
+
+        }
+
+        if (number != -1){
+            number = Integer.parseInt(num);
             int power2 = power2(number);
 
             ArrayList dec = new ArrayList();
@@ -33,7 +41,7 @@ public class PowerTwo {
             result.number = number;
             result.decomposition = dec;
         }
-        catch (Exception ex){
+        else {
             result = new Result2();
             result.number = num;
             result.error = "not a number";
