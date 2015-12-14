@@ -18,17 +18,26 @@ public class PowerTwo {
     public void primeFactors(Request request, Response response) throws Exception {
         String num = request.parameter("number");
 
-        int number = Integer.valueOf(num);
-        int power2 = power2(number);
+        try{
+            int number = Integer.valueOf(num);
+            int power2 = power2(number);
 
-        ArrayList dec = new ArrayList();
-        for(int i=0;i<power2;i++){
-            dec.add(2);
+            ArrayList dec = new ArrayList();
+            for(int i=0;i<power2;i++){
+                dec.add(2);
+            }
+
+            Result result = new Result();
+            result.number = number;
+            result.decomposition = dec;
+        }
+        catch (NumberFormatException ex){
+            Result2 result2 = new Result2();
+            result2.number = num;
+            result2.error = "not a number";
         }
 
-        Result result = new Result();
-        result.number = number;
-        result.decomposition = dec;
+
 
         response.contentType(JSON).body(gson.toJson(result));
     }
@@ -36,6 +45,11 @@ public class PowerTwo {
     public static class Result{
         public int number;
         public ArrayList<Integer> decomposition;
+    }
+
+    public static class Result2{
+        public String number = "";
+        public String error = "";
     }
 
     public static int power2(int number) {
