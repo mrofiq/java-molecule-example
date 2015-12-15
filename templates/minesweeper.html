@@ -111,6 +111,7 @@ function load() {
 }
 $( "td" ).click(function() {
   console.log("clicked");
+  $(this).addClass("lost");
   $(this).html("lost");
 });
 load();
