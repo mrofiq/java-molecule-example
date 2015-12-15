@@ -94,7 +94,7 @@ var grid = [
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'bomb' , 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'bomb', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
@@ -110,9 +110,16 @@ function load() {
     }
 }
 $( "td" ).click(function() {
-  console.log("clicked");
   $(this).addClass("lost");
-  $(this).html("lost");
+  var elemid = $(this).attr('id');
+  console.log("elemid "+elemid);
+  var pos = elemid.split('-')[1].split('x');
+  var gridval = grid[parseInt(pos[0]-1)][parseInt(pos[1]-1)];
+  console.log(gridval);
+  if (gridval ==  'empty') {
+  $(this).html('1');
+  $(this).addClass("safe");
+  }
 });
 load();
 </script>
