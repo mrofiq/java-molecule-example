@@ -60,7 +60,7 @@ public class Yose {
                 String htmlShip = "";
                 int index = 1;
                 for(String ship:ships){
-                    htmlShip += "<div id=\""+ship+"-"+index+"\">"+ship+"</div></div>";
+                    htmlShip += "<div id=\"gate-1\">gate 1 <div id=\""+ship+"-"+index+"\">"+ship+"</div></div>";
                     index++;
                 }
 
