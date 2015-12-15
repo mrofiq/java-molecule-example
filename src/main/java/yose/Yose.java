@@ -9,6 +9,8 @@ import com.vtence.molecule.templating.Templates;
 import java.io.IOException;
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
+
 import com.vtence.molecule.templating.JMustacheRenderer;
 import com.vtence.molecule.templating.Template;
 import com.vtence.molecule.templating.Templates;
@@ -26,6 +28,7 @@ public class Yose {
                 new JMustacheRenderer().fromDir(new File("templates")).extension("html"));
         final Gson gson = new Gson();
 
+        ArrayList<String> ships = new ArrayList<>();
         server.start(new DynamicRoutes() {{
             get("/").to((request, response) -> {
                 response.contentType("text/html");
@@ -53,15 +56,20 @@ public class Yose {
             });
             get("/ping").to(new Ping(gson)::pong);
             get("/astroport").to((request, response) -> {
+
+                String shipParam = request.parameter("ship");
+                if(shipParam!=null && !shipParam.isEmpty())
+                    ships.add(shipParam);
+
+                String htmlShip = "";
+                for(String ship:ships){
+                    htmlShip += "<div id=\""+ship+"\">"+ship+"</div></div>";
+                }
+
                 response.contentType("text/html");
                 response.body(
                         "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div>" +
-                                "<div id=\"gate-1\">gate 1"+
-                                "<div id=\"ship-1\">ship 1</div></div>"+
-                                "<div id=\"gate-2\">gate 2"+
-                                "<div id=\"ship-2\">ship 2</div></div>"+
-                                "<div id=\"gate-3\">gate 3"+
-                                "<div id=\"ship-3\">ship 3</div></div>"+
+                                htmlShip+
                                 "Ship <form action=\"/astroport\"><input type=\"text\" id=\"ship\" name=\"ship\"/> <button type=\"submit\" id=\"dock\">Dock</button></form>"+
                                 "</body></html>"
                 );
