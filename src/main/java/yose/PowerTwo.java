@@ -22,9 +22,9 @@ public class PowerTwo {
 
         if(size>1) {
             String results = "[";
-            for (int i = 0; i < nums.size(); i++) {
+            for (int i = 0; i < size; i++) {
 
-                results += calculate(nums.get(i).toString());
+                results += calculate(nums.get(i)).toString();
                 if(i< size-1){
                     results += ",";
                 }
