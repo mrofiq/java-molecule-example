@@ -55,8 +55,6 @@ public class Yose {
             });
             get("/ping").to(new Ping(gson)::pong);
             get("/astroport").to((request, response) -> {
-                String shipParam = request.parameter("ship");
-
                 String htmlBody = "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div>" +
                         "<div id=\"gate-1\">gate 1"+
                         "<div id=\"ship-1\">ship 1</div></div>"+
@@ -67,8 +65,9 @@ public class Yose {
                         "Ship <form action=\"/astroport\"><input type=\"text\" id=\"ship\" name=\"ship\"/> <button type=\"submit\" id=\"dock\">Dock</button></form>"+
                         "</body></html>";
 
-                htmlBody = htmlBody.replace("ship 1", shipParam);
-
+                String shipParam = request.parameter("ship");
+                if(shipParam!=null && !shipParam.isEmpty())
+                    htmlBody = htmlBody.replace("ship 1", shipParam);
                 response.contentType("text/html");
                 response.body(htmlBody);
             });
