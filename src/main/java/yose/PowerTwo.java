@@ -20,50 +20,58 @@ public class PowerTwo {
         List<String> nums = request.parameters("number");
 
         Results results = new Results();
-        Result result;
-        String num;
-        for(int i=0;i<nums.size();i++){
-            num = nums.get(i);
-            try{
-                int number = Integer.parseInt(num);
+        if(nums.size()>1) {
+            for (int i = 0; i < nums.size(); i++) {
 
-                if(number > 1000000){
-                    result = new Result3();
-                    ((Result3)result).number = number;
-                    ((Result3)result).error = "too big number (>1e6)";
-                }
-                else {
-                    int power2 = power2(number);
-
-
-                    ArrayList dec = new ArrayList();
-                    for (int i = 0; i < power2; i++) {
-                        dec.add(2);
-                    }
-
-                    ArrayList<Integer> dec2 = primeFactors((long) number);
-                    if (dec2.size() < dec.size()) {
-                        dec = dec2;
-                    }
-
-                    result = new Result1();
-                    ((Result1) result).number = number;
-                    ((Result1) result).decomposition = dec;
-                }
+                results.results.add(calculate(nums.get(i)));
             }
-            catch (Exception ex){
-                result = new Result2();
-                ((Result2)result).number = num;
-                ((Result2)result).error = "not a number";
-            }
-            results.results.add(result);
+            response.contentType(JSON).body(gson.toJson(results));
+        }
+        else if (nums.size()==1){
+            response.contentType(JSON).body(gson.toJson(calculate(nums.get(0))));
         }
 
-        response.contentType(JSON).body(gson.toJson(results));
     }
 
     public static  abstract class Result{
 
+    }
+
+    public Result calculate (String num){
+        Result result;
+        try{
+            int number = Integer.parseInt(num);
+
+            if(number > 1000000){
+                result = new Result3();
+                ((Result3)result).number = number;
+                ((Result3)result).error = "too big number (>1e6)";
+            }
+            else {
+                int power2 = power2(number);
+
+
+                ArrayList dec = new ArrayList();
+                for (int i = 0; i < power2; i++) {
+                    dec.add(2);
+                }
+
+                ArrayList<Integer> dec2 = primeFactors((long) number);
+                if (dec2.size() < dec.size()) {
+                    dec = dec2;
+                }
+
+                result = new Result1();
+                ((Result1) result).number = number;
+                ((Result1) result).decomposition = dec;
+            }
+        }
+        catch (Exception ex){
+            result = new Result2();
+            ((Result2)result).number = num;
+            ((Result2)result).error = "not a number";
+        }
+        return result;
     }
 
     public static class Results{
