@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="title">Minesweeper</div>
-<table>
+<table border="1">
     <tr>
         <td id="cell-1x1"></td>
         <td id="cell-1x2"></td>
@@ -88,5 +88,28 @@
         <td id="cell-8x8"></td>
     </tr>
 </table>
+<script>
+var grid = [
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'bomb' , 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+    ];
+function load() {
+    for (row = 0; row < grid.length; row++) {
+        for(col = 0; col < grid[row].length; col++){
+            var elemid = 'cell-'+(row+1)+'x'+(col+1);
+            console.log(elemid);
+            document.getElementById(elemid).innerHTML = grid[col][row];
+        }
+    }
+}
+
+load();
+</script>
 </body>
 </html>
