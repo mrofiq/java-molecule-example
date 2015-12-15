@@ -19,11 +19,12 @@ public class PowerTwo {
     public void primeFactors(Request request, Response response) throws Exception {
         List<String> nums = request.parameters("number");
 
-        Results results = new Results();
+
         if(nums.size()>1) {
+            Results results = new Results(nums.size());
             for (int i = 0; i < nums.size(); i++) {
 
-                results.results.add(calculate(nums.get(i)));
+                results.results[i]=calculate(nums.get(i));
             }
             response.contentType(JSON).body(gson.toJson(results));
         }
@@ -75,9 +76,9 @@ public class PowerTwo {
     }
 
     public static class Results{
-        public ArrayList<Result> results;
-        public Results(){
-            results = new ArrayList<Result>();
+        public Result[] results;
+        public Results(int num){
+            results = new Result[num];
         }
     }
 
