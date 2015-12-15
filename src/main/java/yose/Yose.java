@@ -62,8 +62,10 @@ public class Yose {
                     ships.add(shipParam);
 
                 String htmlShip = "";
+                int index = 1;
                 for(String ship:ships){
-                    htmlShip += "<div id=\""+ship+"\">"+ship+"</div></div>";
+                    htmlShip += "<div id=\""+ship+"-"+index+"\">"+ship+"</div></div>";
+                    index++;
                 }
 
                 response.contentType("text/html");
