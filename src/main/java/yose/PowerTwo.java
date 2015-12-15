@@ -26,7 +26,7 @@ public class PowerTwo {
             if(number > 1000000){
                 result = new Result2();
                 result.number = number;
-                ((Result2)result).error = "too big number (>1e6)");
+                ((Result2)result).error = "too big number (>1e6)";
             }
             else {
                 int power2 = power2(number);
