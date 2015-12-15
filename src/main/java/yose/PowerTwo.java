@@ -21,11 +21,12 @@ public class PowerTwo {
 
 
         if(nums.size()>1) {
-            Results results = new Results(nums.size());
+            String results = "[";
             for (int i = 0; i < nums.size(); i++) {
 
-                results.results[i]=calculate(nums.get(i));
+                results += calculate(nums.get(i).toString());
             }
+            results += "]";
             response.contentType(JSON).body(gson.toJson(results));
         }
         else if (nums.size()==1){
