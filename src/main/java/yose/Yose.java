@@ -9,6 +9,8 @@ import com.vtence.molecule.templating.Templates;
 import java.io.IOException;
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
+
 import com.vtence.molecule.templating.JMustacheRenderer;
 import com.vtence.molecule.templating.Template;
 import com.vtence.molecule.templating.Templates;
@@ -49,18 +51,21 @@ public class Yose {
             });
             get("/ping").to(new Ping(gson)::pong);
             get("/astroport").to((request, response) -> {
+                String htmlBody = "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div>" +
+                        "<div id=\"gate-1\">gate 1"+
+                        "<div id=\"ship-1\">ship 1</div></div>"+
+                        "<div id=\"gate-2\">gate 2"+
+                        "<div id=\"ship-2\">ship 2</div></div>"+
+                        "<div id=\"gate-3\">gate 3"+
+                        "<div id=\"ship-3\">ship 3</div></div>"+
+                        "Ship <form action=\"/astroport\"><input type=\"text\" id=\"ship\" name=\"ship\"/> <button type=\"submit\" id=\"dock\">Dock</button></form>"+
+                        "</body></html>";
+
+                String shipParam = request.parameter("ship");
+                if(shipParam!=null && !shipParam.isEmpty())
+                    htmlBody = htmlBody.replace("ship 1", shipParam);
                 response.contentType("text/html");
-                response.body(
-                        "<html><body>Hello Astroport <div id=\"astroport-name\">Astroport</div>" +
-                                "<div id=\"gate-1\">gate 1"+
-                                "<div id=\"ship-1\">ship 1</div></div>"+
-                                "<div id=\"gate-2\">gate 2"+
-                                "<div id=\"ship-2\">ship 2</div></div>"+
-                                "<div id=\"gate-3\">gate 3"+
-                                "<div id=\"ship-3\">ship 3</div></div>"+
-                                "Ship <form action=\"/astroport\"><input type=\"text\" id=\"ship\" name=\"ship\"/> <button type=\"submit\" id=\"dock\">Dock</button></form>"+
-                                "</body></html>"
-                );
+                response.body(htmlBody);
             });
             get("/primeFactors").to(new PowerTwo(gson)::primeFactors);
         }});
