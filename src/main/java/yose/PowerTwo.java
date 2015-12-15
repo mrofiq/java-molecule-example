@@ -5,6 +5,7 @@ import com.vtence.molecule.Request;
 import com.vtence.molecule.Response;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.vtence.molecule.http.MimeTypes.JSON;
 
@@ -16,50 +17,60 @@ public class PowerTwo {
     }
 
     public void primeFactors(Request request, Response response) throws Exception {
-        String num = request.parameter("number");
+        List<String> nums = request.parameters("number");
 
+        Results results = new Results();
         Result result;
+        String num;
+        for(int i=0;i<nums.size();i++){
+            num = nums.get(i);
+            try{
+                int number = Integer.parseInt(num);
 
-        try{
-            int number = Integer.parseInt(num);
-
-            if(number > 1000000){
-                result = new Result3();
-                ((Result3)result).number = number;
-                ((Result3)result).error = "too big number (>1e6)";
-            }
-            else {
-                int power2 = power2(number);
-
-
-                ArrayList dec = new ArrayList();
-                for (int i = 0; i < power2; i++) {
-                    dec.add(2);
+                if(number > 1000000){
+                    result = new Result3();
+                    ((Result3)result).number = number;
+                    ((Result3)result).error = "too big number (>1e6)";
                 }
+                else {
+                    int power2 = power2(number);
 
-                ArrayList<Integer> dec2 = primeFactors((long) number);
-                if (dec2.size() < dec.size()) {
-                    dec = dec2;
+
+                    ArrayList dec = new ArrayList();
+                    for (int i = 0; i < power2; i++) {
+                        dec.add(2);
+                    }
+
+                    ArrayList<Integer> dec2 = primeFactors((long) number);
+                    if (dec2.size() < dec.size()) {
+                        dec = dec2;
+                    }
+
+                    result = new Result1();
+                    ((Result1) result).number = number;
+                    ((Result1) result).decomposition = dec;
                 }
-
-                result = new Result1();
-                ((Result1) result).number = number;
-                ((Result1) result).decomposition = dec;
             }
+            catch (Exception ex){
+                result = new Result2();
+                ((Result2)result).number = num;
+                ((Result2)result).error = "not a number";
+            }
+            results.results.add(result);
         }
-        catch (Exception ex){
-            result = new Result2();
-            ((Result2)result).number = num;
-            ((Result2)result).error = "not a number";
-        }
 
-
-
-        response.contentType(JSON).body(gson.toJson(result));
+        response.contentType(JSON).body(gson.toJson(results));
     }
 
     public static  abstract class Result{
 
+    }
+
+    public static class Results{
+        public ArrayList<Result> results;
+        public Results(){
+            results = new ArrayList<Result>();
+        }
     }
 
     public  static class Result1 extends Result{
