@@ -20,13 +20,15 @@ public class PowerTwo {
         List<String> nums = request.parameters("number");
 
 
-        if(nums.size()>1) {
+        int size = nums.size();
+        if(size>1) {
             String results = "[";
-            for (int i = 0; i < nums.size(); i++) {
-
-
+            for (int i = 0; i < size; i++) {
 
                 results += gson.toJson(calculate(nums.get(i))).toString();
+                if(i<size-1){
+                    results += ",";
+                }
             }
             results += "]";
             response.contentType(JSON).body(gson.toJson(results));
