@@ -88,6 +88,7 @@
         <td id="cell-8x8"></td>
     </tr>
 </table>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script>
 var grid = [
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
@@ -108,7 +109,10 @@ function load() {
         }
     }
 }
-
+$( "td" ).click(function() {
+  console.log("clicked");
+  $(this).html("lost");
+});
 load();
 </script>
 </body>
