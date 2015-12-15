@@ -38,6 +38,10 @@ public class Yose {
                                 "<div id=\"readme\">YoseTheGame</div>"+
                                 "</body></html>");
             });
+            get("/minesweeper").to((request, response) -> {
+                response.contentType("text/html");
+                response.body(templates.named("minesweeper").render(null));
+            });
             get("/test").to((request, response) -> {
                 response.contentType("text/html");
                 response.body(templates.named("test").render(null));
