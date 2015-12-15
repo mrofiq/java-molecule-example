@@ -23,24 +23,29 @@ public class PowerTwo {
         try{
             int number = Integer.parseInt(num);
 
-
-
-            int power2 = power2(number);
-
-
-            ArrayList dec = new ArrayList();
-            for(int i=0;i<power2;i++){
-                dec.add(2);
+            if(number > 1000000){
+                result = new Result3();
+                ((Result3)result).number = number;
+                ((Result3)result).error = "too big number (>1e6)";
             }
+            else {
+                int power2 = power2(number);
 
-            ArrayList<Integer> dec2 = primeFactors((long)number);
-            if(dec2.size()< dec.size()){
-                dec = dec2;
+
+                ArrayList dec = new ArrayList();
+                for (int i = 0; i < power2; i++) {
+                    dec.add(2);
+                }
+
+                ArrayList<Integer> dec2 = primeFactors((long) number);
+                if (dec2.size() < dec.size()) {
+                    dec = dec2;
+                }
+
+                result = new Result1();
+                ((Result1) result).number = number;
+                ((Result1) result).decomposition = dec;
             }
-
-            result = new Result1();
-            ((Result1)result).number = number;
-            ((Result1)result).decomposition = dec;
         }
         catch (Exception ex){
             result = new Result2();
@@ -54,6 +59,7 @@ public class PowerTwo {
     }
 
     public static  abstract class Result{
+
     }
 
     public  static class Result1 extends Result{
@@ -63,6 +69,11 @@ public class PowerTwo {
 
     public static class Result2 extends Result{
         public String number = "";
+        public String error = "";
+    }
+
+    public static class Result3 extends Result{
+        public int number;
         public String error = "";
     }
 
