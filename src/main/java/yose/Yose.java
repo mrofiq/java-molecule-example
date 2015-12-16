@@ -72,12 +72,11 @@ public class Yose {
                 response.body(htmlBody);
             });
             get("/primeFactors").to(new PowerTwo(gson)::primeFactors);
-//            get("/astroport").to((request, response) -> {
-//                Templates t = templates.named("astroport");
-//
-//                        response.contentType("text/html");
-//                response.body(templates.named("astroport").render(null));
-//            });
+            get("/primeFactors/ui").to((request, response) -> {
+                Template template = templates.named("form");
+                response.contentType("text/html");
+                response.body(template.render(null));
+            });
         }});
     }
 
