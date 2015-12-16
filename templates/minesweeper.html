@@ -90,7 +90,7 @@
 </table>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script>
-var grid = [
+document.grid = [
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'bomb', 'empty', 'bomb' , 'empty', 'empty'],
@@ -101,11 +101,11 @@ var grid = [
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
     ];
 function load() {
-    for (row = 0; row < grid.length; row++) {
-        for(col = 0; col < grid[row].length; col++){
+    for (row = 0; row < document.grid.length; row++) {
+        for(col = 0; col < document.grid[row].length; col++){
             var elemid = 'cell-'+(row+1)+'x'+(col+1);
             console.log(elemid);
-            document.getElementById(elemid).innerHTML = grid[col][row];
+            document.getElementById(elemid).innerHTML = document.grid[col][row];
         }
     }
 }
@@ -134,7 +134,7 @@ $( "td" ).click(function() {
         if (ynow > 7)
             continue;
 
-        if (grid[xnow][ynow] == 'bomb') num++;
+        if (document.grid[xnow][ynow] == 'bomb') num++;
       }
   }
 
@@ -146,7 +146,7 @@ $( "td" ).click(function() {
     $(this).addClass("safe");
   }
   /*
-  else if (grid[x][y] ==  'empty') {
+  else if (document.grid[x][y] ==  'empty') {
       $(this).html(num);
       $(this).addClass("safe");
   }
