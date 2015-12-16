@@ -30,7 +30,7 @@ public class PowerTwo {
                 }
             }
             results += "]";
-            response.contentType(JSON).body(gson.toJson(results));
+            response.contentType(JSON).body(results);
         }
         else if (nums.size()==1){
             response.contentType(JSON).body(gson.toJson(calculate(nums.get(0))));
