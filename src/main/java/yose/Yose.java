@@ -77,6 +77,7 @@ public class Yose {
                 response.contentType("text/html");
                 response.body(template.render(null));
             });
+            get("fire/geek").to(new Fire(gson)::primeFactors);
         }});
     }
 
