@@ -24,7 +24,7 @@ public class PowerTwo {
             String results = "[";
             for (int i = 0; i < size; i++) {
 
-                results += calculate(nums.get(i)).toString();
+                results += gson.toJson(calculate(nums.get(i)));
                 if(i< size-1){
                     results += ",";
                 }
