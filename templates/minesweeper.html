@@ -135,7 +135,12 @@ $( "td" ).click(function() {
         if (grid[xnow][ynow] == 'bomb') num++;
       }
   }
-  if (grid[x][y] ==  'empty') {
+
+  if (num == 0) {
+    $(this).html('');
+    $(this).addClass("safe");
+  }
+  else if (grid[x][y] ==  'empty') {
       $(this).html(num);
       $(this).addClass("safe");
   }
