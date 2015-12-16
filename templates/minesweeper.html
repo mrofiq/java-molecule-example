@@ -129,31 +129,107 @@ $( "td" ).click(function() {
             continue;
         if (ynow < 0)
             continue;
-        if (xnow > 7)
+        if (xnow >= document.grid.length)
             continue;
-        if (ynow > 7)
+        if (ynow >= document.grid.length)
             continue;
 
         if (document.grid[xnow][ynow] == 'bomb') num++;
       }
   }
 
+  console.log("number bomb: "+num);
+
   if (num == 0) {
     $(this).html('');
     $(this).addClass("safe");
+
+      for (vx = -1; vx < 2; vx++){
+          for (vy = -1; vy < 2; vy++){
+            xnow = x + vx;
+            ynow = y + vy;
+
+            if (vx == 0 && vy == 0) continue;
+            if (xnow < 0)
+                continue;
+            if (ynow < 0)
+                continue;
+            if (xnow >= document.grid.length)
+                continue;
+            if (ynow >= document.grid.length)
+                continue;
+
+            var elemid = '#cell-'+(xnow+1)+'x'+(ynow+1);
+            console.log(elemid);
+
+            //$(elemid).click();
+            //console.log("click "+elemid);
+            clickcell(xnow, ynow);
+        }
+      }
   } else {
     $(this).html(num);
     $(this).addClass("safe");
   }
-  /*
-  else if (document.grid[x][y] ==  'empty') {
-      $(this).html(num);
-      $(this).addClass("safe");
-  }
-  */
 });
 
 load();
+
+function clickcell(x,y) {
+  var num = 0;
+  for (vx = -1; vx < 2; vx++){
+      for (vy = -1; vy < 2; vy++){
+        xnow = x + vx;
+        ynow = y + vy;
+
+        if (vx == 0 && vy == 0) continue;
+
+        if (xnow < 0)
+            continue;
+        if (ynow < 0)
+            continue;
+        if (xnow >= document.grid.length)
+            continue;
+        if (ynow >= document.grid.length)
+            continue;
+
+        if (document.grid[xnow][ynow] == 'bomb') num++;
+      }
+  }
+
+    var elemid = '#cell-'+(x+1)+'x'+(y+1);
+    if (num == 0) {
+        $(elemid).html('');
+        $(elemid).addClass("safe");
+
+          for (vx = -1; vx < 2; vx++){
+              for (vy = -1; vy < 2; vy++){
+                xnow = x + vx;
+                ynow = y + vy;
+
+                if (vx == 0 && vy == 0) continue;
+                if (xnow < 0)
+                    continue;
+                if (ynow < 0)
+                    continue;
+                if (xnow >= document.grid.length)
+                    continue;
+                if (ynow >= document.grid.length)
+                    continue;
+
+                var elemid = '#cell-'+(xnow+1)+'x'+(ynow+1);
+                console.log(elemid);
+
+                //$(elemid).click();
+                clickcell(xnow, ynow);
+                //console.log("click "+elemid);
+            }
+      }
+  } else {
+    $(elemid).html(num);
+    $(elemid).addClass("safe");
+  }
+}
 </script>
 </body>
 </html>
