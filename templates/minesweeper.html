@@ -94,7 +94,7 @@ var grid = [
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'bomb' , 'empty', 'empty'],
-        ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+        ['empty', 'empty', 'empty', 'empty', 'bomb', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
         ['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
@@ -110,10 +110,37 @@ function load() {
     }
 }
 $( "td" ).click(function() {
-  console.log("clicked");
   $(this).addClass("lost");
-  $(this).html("lost");
+  var elemid = $(this).attr('id');
+  console.log("elemid "+elemid);
+  var pos = elemid.split('-')[1].split('x');
+  var x = parseInt(pos[0]-1);
+  var y = parseInt(pos[1]-1);
+
+  var num = 0;
+  for (vx = -1; vx < 2; vx++){
+      for (vy = -1; vy < 2; vy++){
+        xnow = x + vx;
+        ynow = y + vy;
+
+        if (xnow < 0)
+            continue;
+        if (ynow < 0)
+            continue;
+        if (xnow > 7)
+            continue;
+        if (ynow > 7)
+            continue;
+
+        if (grid[xnow][ynow] == 'bomb') num++;
+      }
+  }
+  if (grid[x][y] ==  'empty') {
+      $(this).html(num);
+      $(this).addClass("safe");
+  }
 });
+
 load();
 </script>
 </body>
