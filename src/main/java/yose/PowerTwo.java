@@ -18,19 +18,16 @@ public class PowerTwo {
 
     public void primeFactors(Request request, Response response) throws Exception {
         List<String> nums = request.parameters("number");
-        int size = nums.size();
 
-        if(size>1) {
+
+        if(nums.size()>1) {
             String results = "[";
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < nums.size(); i++) {
 
-                results += gson.toJson(calculate(nums.get(i)));
-                if(i< size-1){
-                    results += ",";
-                }
+                results += calculate(nums.get(i).toString());
             }
             results += "]";
-            response.contentType(JSON).body(results);
+            response.contentType(JSON).body(gson.toJson(results));
         }
         else if (nums.size()==1){
             response.contentType(JSON).body(gson.toJson(calculate(nums.get(0))));
