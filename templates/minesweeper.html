@@ -123,6 +123,8 @@ $( "td" ).click(function() {
         xnow = x + vx;
         ynow = y + vy;
 
+        if (vx == 0 && vy == 0) continue;
+
         if (xnow < 0)
             continue;
         if (ynow < 0)
